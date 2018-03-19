@@ -38,7 +38,11 @@ export default class ScrollViewer extends BaseScrollView {
         if (this.props.onSizeChanged) {
             if (this.props.useWindowScroll) {
                 this._startListeningToWindowEvents();
-                this.props.onSizeChanged({ height: window.innerHeight, width: window.innerWidth });
+                let width = window.innerWidth;
+                if ( this.props.maxWidth ) {
+                    width = this.props.maxWidth;
+                }
+                this.props.onSizeChanged({ height: window.innerHeight, width });
             } else if (this._mainDivRef) {
                 this._startListeningToDivEvents();
                 this.props.onSizeChanged({ height: this._mainDivRef.clientHeight, width: this._mainDivRef.clientWidth });
@@ -193,7 +197,11 @@ export default class ScrollViewer extends BaseScrollView {
 
     private _onWindowResize(): void {
         if (this.props.onSizeChanged && this.props.useWindowScroll) {
-            this.props.onSizeChanged({ height: window.innerHeight, width: window.innerWidth });
+            let maxWidth = window.innerWidth;
+            if ( this.props.maxWidth ) {
+                 maxWidth = this.props.maxWidth;
+             }
+            this.props.onSizeChanged({ height: window.innerHeight, width: maxWidth });
         }
     }
 
