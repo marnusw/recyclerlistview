@@ -37,7 +37,7 @@ captures/
 .idea/
 
 # Distribution
-dist/
+# dist/ - allow installing from github
 
 # Keystore files
 *.jks
